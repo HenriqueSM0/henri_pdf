@@ -22,4 +22,4 @@ GROQ_KEY_API = '{your_key}'
 
 6- Put PDFs in (pdfs) folder :
 
-5- Run main.py
+7- Run main.py
