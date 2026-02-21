@@ -4,7 +4,7 @@
 
 git init
 
-git clone 'https://github.com/HenriqueSM0/chatbot_llama'
+git clone 'https://github.com/HenriqueSM0/henri_pdf'
 
 3- Create a virtual ambient :
 
