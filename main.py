@@ -49,7 +49,7 @@ class File_view_frame (tk.Frame) :
         self.active = True
     
     def load(self, dir) :
-       if ((self.itv[0] == 0 and dir == -1) or (self.itv[1] > n_pdfs - 1 and dir == 1)) : return
+       if ((self.itv[0] == 0 and dir == -1) or (self.itv[1] >= n_pdfs - 1 and dir == 1)) : return
        for but in self.pdf_but_list : 
           if (but['bg'] == "#00ebef") : but['bg'] = "#ffffff"
        if (self.active == False) : return
