@@ -96,6 +96,7 @@ class Text_view_frame (tk.Frame) :
 
     def resume_text (self, text) :
         self.res_txt['state'] = 'normal'
+        st.delete("1.0", 'end')
         user_msg = Message(
             role="user",
             content= text + '\n(Tente resumir o texto acima, mesmo que tenha sido tirado de um pdf e que sua vizualização esteja complicada.)'
