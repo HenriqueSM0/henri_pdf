@@ -92,7 +92,6 @@ class Text_view_frame (tk.Frame) :
             state = 'disabled'
             )
         self.res_txt.grid(column=0, row=0)
-        self.error = False
 
     def resume_text (self, text) :
         self.res_txt['state'] = 'normal'
@@ -102,13 +101,8 @@ class Text_view_frame (tk.Frame) :
             content= text + '\n(Tente resumir o texto acima, mesmo que tenha sido tirado de um pdf e que sua vizualização esteja complicada.)'
         )
         try : self.res_txt.insert('end', model.invoke(messages=[user_msg], assistant_message=Message(role="assistant", content='')).content) 
-        except : 
-            if (self.error == False) : 
-                self.res_txt.insert('end', 'ocorreu um erro!')
-                self.error = True
-        self.res_txt['state'] = 'disabled'
+        except : self.res_txt.insert('end', 'ocorreu um erro!')
         
-
 Tvf = Text_view_frame(Fright)
 Tvf.grid(column=0, row=0, padx=(0, 15), pady=(0, 15))
 
