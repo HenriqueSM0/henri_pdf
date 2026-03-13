@@ -8,11 +8,11 @@ git clone 'https://github.com/HenriqueSM0/henri_pdf'
 
 3- Create a virtual ambient :
 
-python 3 -m venv venv
+python3 -m venv venv
 
 source venv/bin/activate
 
-pip install -r requirements
+pip install -r requirements.txt
 
 4- Create a API key in GROQ :
 
