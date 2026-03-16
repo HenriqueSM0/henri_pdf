@@ -1,25 +1,37 @@
-1- Make sure you have python 3.9 or newer, and both tkinter and venv modules installed.
+# HenriPDF
 
-2- Clone the respository :
+## Description
 
-git init
+A project that allows you to concatenate and summarize PDFs with AI. It features a graphical interface for selecting PDFs and viewing the summary. It uses Python, Agno, and Llama 3.3 (or another model of your choice).
 
-git clone 'https://github.com/HenriqueSM0/henri_pdf'
+## Folder Structure
 
-3- Create a virtual ambient :
+output : Where concatenations of PDFs will be.
+/pdfs : Where you put pdfs.
+.env : Put your API key here (Instructions above!).
+main.py : File to run.
+requirements.txt : File with all libraries to run the file.
 
-python3 -m venv venv
+## Instructions to use
 
-source venv/bin/activate
+1. **Make sure you have python 3.9 or newer, and both tkinter and venv modules installed.**
 
-pip install -r requirements.txt
+2. **Clone the repository:**
+   ```bash
+   git init
+   git clone 'https://github.com/HenriqueSM0/henri_pdf'
 
-4- Create a API key in GROQ :
+3. **Create a virtual environment:**
+  python3 -m venv venv
+  source venv/bin/activate
+  pip install -r requirements.txt
 
-5- Put in .env :
+5. **Create an API key in GROQ:**
+   Put it on .env :
+   GROQ_KEY_API = 'your_api_key_here'
+   
+7. **Add PDF files:**
+   Place the PDFs you want to process in the pdfs/ folder
 
-GROQ_KEY_API = '{your_key}'
-
-6- Put PDFs in (pdfs) folder :
-
-7- Run main.py
+8. **Run the application:**
+   python main.py
