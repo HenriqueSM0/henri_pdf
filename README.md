@@ -1,21 +1,36 @@
 # HenriPDF
 
-## Description
+A powerful tool that allows you to concatenate and summarize PDFs using Artificial Intelligence. The application features an intuitive graphical interface for selecting PDF files and viewing generated summaries.
+
+## 📋 Description
 
 A project that allows you to concatenate and summarize PDFs with AI. It features a graphical interface for selecting PDFs and viewing the summary. It uses Python, Agno, and Llama 3.3 (or another model of your choice).
 
+## ✨ Features
+
+- 📎 Concatenate multiple PDF files into a single document
+- 🤖 AI-powered summarization of PDF content
+- 🖥️ User-friendly graphical interface
+- 🔧 Support for multiple AI models (Llama 3.3 or your choice)
+- 📁 Organized output structure
+
+## 🛠️ Technologies Used
+
+- Python 3.9+
+- Agno
+- Llama 3.3 (configurable)
+- Tkinter (GUI)
+- Python Virtual Environment
+
+## 📁 Project Structure
+
 ## Folder Structure
 
-output : Where concatenations of PDFs will be.
-
-/pdfs : Where you put pdfs.
-
-.env : Put your API key here (Instructions above!).
-
-main.py : File to run.
-
-requirements.txt : File with all libraries to run the file.
-
+-output : Where concatenations of PDFs will be.
+-/pdfs : Where you put pdfs.
+-.env : Put your API key here (Instructions above!).
+-main.py : File to run.
+-requirements.txt : File with all libraries to run the file.
 
 ## Instructions to use
 
