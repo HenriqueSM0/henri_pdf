@@ -8,9 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
 model = Groq(id="llama-3.3-70b-versatile") # Model : Change if you want
-
 
 pdfs_path = "pdfs"
 all_files = os.listdir(pdfs_path)
