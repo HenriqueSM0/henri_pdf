@@ -22,13 +22,13 @@ A project that allows you to concatenate and summarize PDFs with AI. It features
 - Tkinter (GUI)
 - Python Virtual Environment
 
-## 📁 Project Structure
+## Project Structure
 
 PDF -> pypdf lib -> pdf text -> agno + AI -> resumed PDF text. 
 
 PDFs -> pypdf lib -> PDF with all pages from PDFs.
 
-## Folder Structure
+## 📁 Folder Structure
 
 output : Where concatenations of PDFs will be.
 
