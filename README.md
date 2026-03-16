@@ -24,6 +24,10 @@ A project that allows you to concatenate and summarize PDFs with AI. It features
 
 ## 📁 Project Structure
 
+PDF -> pypdf lib -> pdf text -> agno + AI -> resumed PDF text. 
+
+PDFs -> pypdf lib -> PDF with all pages from PDFs.
+
 ## Folder Structure
 
 output : Where concatenations of PDFs will be.
