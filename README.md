@@ -26,11 +26,15 @@ A project that allows you to concatenate and summarize PDFs with AI. It features
 
 ## Folder Structure
 
--output : Where concatenations of PDFs will be.
--/pdfs : Where you put pdfs.
--.env : Put your API key here (Instructions above!).
--main.py : File to run.
--requirements.txt : File with all libraries to run the file.
+output : Where concatenations of PDFs will be.
+
+/pdfs : Where you put pdfs.
+
+.env : Put your API key here (Instructions above!).
+
+main.py : File to run.
+
+requirements.txt : File with all libraries to run the file.
 
 ## Instructions to use
 
