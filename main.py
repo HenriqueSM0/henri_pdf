@@ -63,21 +63,41 @@ class File_view_frame (tk.Frame) :
         for but in self.pdf_but_list : 
             if (but['bg'] == "#00ebef") : but['bg'] = "#ffffff"
         self.pdf_but_list[index % 5]['bg'] = "#00ebef"
-        path = Path('pdfs') / f'{pdf_files[index]}'  
-        pdf = [page for page in pypdf.PdfReader(path).pages]
-        text = ''
-        for page in pdf : text += (page.extract_text() + '\n')
+        path = Path('pdfs') / f'{pdf_files[index]}'
+        try:
+            pdf = [page for page in pypdf.PdfReader(path).pages]
+            text = ''
+            for page in pdf : text += (page.extract_text() + '\n')
+        except Exception as ex:
+            msg = str(ex).lower()
+            if "password" in msg or "encrypt" in msg:
+                Tvf.show_error("Could not open PDF: file is encrypted or password-protected")
+            else:
+                Tvf.show_error("Could not read PDF: file may be corrupted or unreadable")
+            return
+        if len(text) > 30000:
+            Tvf.show_error("This PDF is too long to summarize")
+            return
         Tvf.resume_text(text)
     
     def concatenate (self) :
-        paths = [Path('pdfs') / f'{pdf_file}' for pdf_file in pdf_files]
-        writer = pypdf.PdfWriter()
-        pdfs = [pdf for pdf in [pypdf.PdfReader(path) for path in paths]]
-        pages_of_each = [pdf.pages for pdf in pdfs]
-        for pages in pages_of_each :
-            for page in pages : 
-                writer.add_page(page)
-        writer.write('output/concatenated_doc.pdf')
+        try:
+            paths = [Path('pdfs') / f'{pdf_file}' for pdf_file in pdf_files]
+            writer = pypdf.PdfWriter()
+            pdfs = [pdf for pdf in [pypdf.PdfReader(path) for path in paths]]
+            pages_of_each = [pdf.pages for pdf in pdfs]
+            for pages in pages_of_each :
+                for page in pages : 
+                    writer.add_page(page)
+            writer.write('output/concatenated_doc.pdf')
+        except Exception as ex:
+            msg = str(ex).lower()
+            if "permission" in msg or "access" in msg:
+                messagebox.showerror("Concatenation failed", "Could not write output file: permission denied")
+            elif "password" in msg or "encrypt" in msg:
+                messagebox.showerror("Concatenation failed", "Could not concatenate: one or more PDFs are encrypted")
+            else:
+                messagebox.showerror("Concatenation failed", "Could not concatenate PDFs: one or more files may be corrupted")
 
 class Text_view_frame (tk.Frame) :
     def __init__ (self, master) :
@@ -91,15 +111,30 @@ class Text_view_frame (tk.Frame) :
             )
         self.res_txt.grid(column=0, row=0)
 
+    def show_error(self, message):
+        self.res_txt['state'] = 'normal'
+        self.res_txt.delete("1.0", 'end')
+        self.res_txt.insert('end', message)
+        self.res_txt['state'] = 'disabled'
+
     def resume_text (self, text) :
         self.res_txt['state'] = 'normal'
-        self.res_text.delete("1.0", 'end')
+        self.res_txt.delete("1.0", 'end') 
         user_msg = Message(
             role="user",
             content= text + '\n(Tente resumir o texto acima, mesmo que tenha sido tirado de um pdf e que sua vizualização esteja complicada.)'
         )
-        try : self.res_txt.insert('end', model.invoke(messages=[user_msg], assistant_message=Message(role="assistant", content='')).content) 
-        except : self.res_txt.insert('end', 'ocorreu um erro!')
+        try:
+            self.res_txt.insert('end', model.invoke(messages=[user_msg], assistant_message=Message(role="assistant", content='')).content)
+        except Exception as ex:
+            msg = str(ex).lower()
+            if "api key" in msg or "authentication" in msg or "401" in msg or "invalid_api_key" in msg:
+                self.res_txt.insert('end', "You need to put a valid API key on .env")
+            elif "too long" in msg or "context" in msg or "token" in msg or "413" in msg or "max_tokens" in msg:
+                self.res_txt.insert('end', "Your prompt is too long")
+            else:
+                self.res_txt.insert('end', f"Error: {ex}")
+        self.res_txt['state'] = 'disabled'
         
 Tvf = Text_view_frame(Fright)
 Tvf.grid(column=0, row=0, padx=(0, 15), pady=(0, 15))
